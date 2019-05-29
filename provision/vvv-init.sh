@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Site environment
+if [ ! -f "${VVV_PATH_TO_SITE}/site/public_html" ] ; then
+  mkdir -p "${VVV_PATH_TO_SITE}/site/public_html"
+fi
+
 # Nginx Logs
 mkdir -p "${VVV_PATH_TO_SITE}/log"
 touch "${VVV_PATH_TO_SITE}/log/nginx-error.log"
