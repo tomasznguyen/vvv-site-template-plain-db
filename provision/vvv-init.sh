@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+DB_NAME=`get_config_value 'db_name' "${VVV_SITE_NAME}"`
+DB_NAME=${DB_NAME//[\\\/\.\<\>\:\"\'\|\?\!\*-]/}
+
+# Make a database, if we don't already have one
+echo -e "\nCreating database '${DB_NAME}' (if it's not already there)"
+mysql -u root --password=root -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME}"
+echo -e "\n DB operations done.\n\n"
+
 # Site environment
 if [ ! -f "${VVV_PATH_TO_SITE}/site/public_html" ] ; then
   mkdir -p "${VVV_PATH_TO_SITE}/site/public_html"
